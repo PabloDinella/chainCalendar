@@ -8,8 +8,8 @@ This is my first project for my daily code exercise. It's based on [this](https:
 Things I want to implement:
 
 - [x] Basic markup builder
-- [] Select year feature
-- [] Some fancy css
-- [] Weekend distinction
-- [] Week distinction?
-- [] Maybe a way to mark days with a red X? And save somewhere, like dropbox?
+- [ ] Select year feature
+- [ ] Some fancy css
+- [ ] Weekend distinction
+- [ ] Week distinction?
+- [ ] Maybe a way to mark days with a red X? And save somewhere, like dropbox?
