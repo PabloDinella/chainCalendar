@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chain Calendar</title>
+  </head>
+  <body>
+    
+    <script>
+      function getAllDaysInMonth(month, year) {
+        var date = new Date(year, month, 1)
+        var days = []
+        while (date.getMonth() == month) {
+          days.push(date.getDate())
+          date.setDate(date.getDate() + 1)
+        }
+        return days
+      }
+
+      function createCalendar(year) {
+      var months = [...new Array(12).keys()]
+      var yearElement = document.createElement('time')
+      yearElement.setAttribute('datetime', year)
+      yearElement.innerHTML = '<span>' + year + '</span>'
+
+      for (m of months) {
+        var monthElement = document.createElement('time')
+        var days = getAllDaysInMonth(m, year)
+        var twoDigitsMonth = (m < 9) ? '0' + (m+1) : (m+1)
+
+        monthElement.setAttribute('datetime', year + '-' + twoDigitsMonth)
+
+        for (d of days) {
+          var twoDigitsDay = (d < 10) ? '0' + d : d
+          monthElement.innerHTML += '<time datetime="' + [year, twoDigitsMonth, twoDigitsDay].join('-') + '">' + d + '</time>'
+        }
+
+        yearElement.appendChild(monthElement)
+      }
+      return yearElement
+      }
+
+      document.body.appendChild(createCalendar(2017))
+
+
+    </script>
+  </body>
+</html>
