@@ -1,0 +1,41 @@
+html, body {
+  margin: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: #aaa;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.year {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.year .title {
+  padding: 7px;
+  font-size: 1.5em;
+  font-weight: 300;
+  letter-spacing: 7px;
+}
+
+.month {
+  display: flex;
+}
+
+.month time {
+  padding: 10px 7px;
+}
+
+.month .weekend {
+  color: #777;
+}
