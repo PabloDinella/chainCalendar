@@ -1,6 +1,6 @@
 # Introduction
 
-This is my first project for my daily code exercise. It's based on [this](https://medium.com/@thassiov/um-desafio-para-mim-mesmo-10-dias-de-requests-2488b609131e) and [this](http://lifehacker.com/281626/jerry-seinfelds-productivity-secret) post.
+This is my first project for my [daily code exercise](https://github.com/PabloDinella/100-days-of-code). It's based on [this](https://medium.com/@thassiov/um-desafio-para-mim-mesmo-10-dias-de-requests-2488b609131e) and [this](http://lifehacker.com/281626/jerry-seinfelds-productivity-secret) post.
 
 ([view online](https://pablodinella.github.io/chainCalendar/))
 
