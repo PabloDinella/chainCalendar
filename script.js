@@ -8,6 +8,10 @@ function getAllDaysInMonth(month, year) {
   return days
 }
 
+function toTwoDigits(number) {
+  return (number < 10) ? '0' + (number) : number
+}
+
 function changeYear() {
   var container = this.parentNode.parentNode
   var year = parseInt(container.querySelector('.title').innerHTML) - 1
@@ -18,39 +22,52 @@ function changeYear() {
   container.appendChild(createCalendar(year))
 }
 
-function createCalendar(year) {
-  var months = [...new Array(12).keys()]
+function createDayElement(y, m, d) {
+  var dayElement = document.createElement('time')
+  dayElement.setAttribute('datetime', [y, toTwoDigits(m+1), toTwoDigits(d)])
+  if ([0,6].indexOf(new Date(y,m,d).getDay()) !== -1) {
+    dayElement.className = 'weekend'
+  }
+  dayElement.innerHTML = d
+  return dayElement
+}
+
+function createMonthElement(y, m) {
+  var monthElement = document.createElement('time')
+  var days = getAllDaysInMonth(m, y)
+  for (d of days) {
+    monthElement.appendChild(createDayElement(y, m, d))
+  }
+  monthElement.setAttribute('datetime', y + '-' + toTwoDigits(m+1))
+  monthElement.className = 'month'
+  return monthElement
+}
+
+function createYearElement(y) {
   var yearElement = document.createElement('time')
-  yearElement.setAttribute('datetime', year)
+  yearElement.setAttribute('datetime', y)
   yearElement.className = 'year'
-  yearElement.innerHTML = '<header><button class="prev"><</button><span class="title">' + year + '</span><button class="next">></button></header>'
+  yearElement.innerHTML = '<header><button class="prev"><</button><span class="title">' + y + '</span><button class="next">></button></header>'
 
   for (btn of yearElement.querySelectorAll('.prev, .next')) {
     btn.onclick = changeYear
   }
 
+  var months = [...new Array(12).keys()]
   for (m of months) {
-    var monthElement = document.createElement('time')
-    var days = getAllDaysInMonth(m, year)
-    var twoDigitsMonth = (m < 9) ? '0' + (m+1) : (m+1)
-
-    monthElement.setAttribute('datetime', year + '-' + twoDigitsMonth)
-    monthElement.className = 'month'
-
-    for (d of days) {
-      var twoDigitsDay = (d < 10) ? '0' + d : d
-      var dayElement = document.createElement('time')
-      dayElement.setAttribute('datetime', [year, twoDigitsMonth, twoDigitsDay])
-      if ([0,6].indexOf(new Date(year,m,d).getDay()) !== -1) {
-        dayElement.className = 'weekend'
-      }
-      dayElement.innerHTML = d
-      monthElement.appendChild(dayElement)
-    }
-
-    yearElement.appendChild(monthElement)
+    yearElement.appendChild(createMonthElement(y, m))
   }
   return yearElement
 }
 
-document.querySelector('.container').appendChild(createCalendar(2017))
+function createCalendar(selector) {
+  var year = new Date().getFullYear()
+  var el = document.querySelector(selector)
+  if (!el) {
+    return;
+  }
+  el.appendChild(createYearElement(year))
+  return true;
+}
+
+createCalendar('.calendar')
